@@ -241,6 +241,8 @@
 		</code></pre>
 
 		<p>Uncomment the <strong>client-to-client visibility</strong>.</p>
+		<div class="code-label " title="/etc/openvpn/server.conf">/etc/openvpn/server.conf</div><pre class="code-pre "><code>client-to-client
+		</code></pre>
 		<p>The changes you’ve made to the sample <code>server.conf</code> file up to this point are necessary in order for OpenVPN to function. The changes outlined below are optional, though they too are needed for many common use cases.</p>
 
 		<h3 id="optional-push-dns-changes-to-redirect-all-traffic-through-the-vpn">(Optional) Push DNS Changes to Redirect All Traffic Through the VPN</h3>
@@ -507,6 +509,11 @@
 		<p>Here is an example SFTP command using the <code><span class="highlight">client1.ovpn</span></code> example which you can run from your local computer (macOS or Linux). It places the <code>.ovpn</code> file in your home directory:</p>
 		<pre class="code-pre custom_prefix prefixed local-environment"><code><ul class="prefixed"><li class="line" prefix="local$">sftp <span class="highlight">sammy</span>@<span class="highlight">your_server_ip</span>:client-configs/files/client1.ovpn ~/
 		</li></ul></code></pre>
+
+		<p>Also you need to transfer <code><span class="highlight">client1.crt</span></code> and <code><span class="highlight">ta.key</span></code> to your local computer.</p>
+		<pre class="code-pre custom_prefix prefixed local-environment"><code><ul class="prefixed"><li class="line" prefix="local$">sftp <span class="highlight">sammy</span>@<span class="highlight">your_server_ip</span>:client-configs/files/client1.crt ~/
+		</li><li class="line" prefix="local$">sftp <span class="highlight">sammy</span>@<span class="highlight">your_server_ip</span>:client-configs/files/ta.key ~/
+		</li></ul></code></pre>
 		<p>Here are several tools and tutorials for securely transferring files from the server to a local computer:</p>
 
 		<a name="step-10-—-installing-the-client-configuration" data-unique="step-10-—-installing-the-client-configuration"></a><a name="step-10-—-installing-the-client-configuration" data-unique="step-10-—-installing-the-client-configuration"></a><h2 id="step-10-—-installing-the-client-configuration">Step 10 — Installing the Client Configuration</h2>
@@ -571,8 +578,10 @@
 		</code></pre>
 		<p>Save and close the file.</p>
 
-		<p>Now, copy the <code>client1.ovpn</code> in <code>/etc/openvpn</code> folder: </p>
-		<pre class="code-pre custom_prefix prefixed local-environment"><code><ul class="prefixed"><li class="line" prefix="client$">sudo cp <span class="highlight">client1</span>.ovpn /etc/openvpn/
+		<p>Now, copy the <code>client1.ovpn</code>, <code>client1.crt</code> and <code>ta.key</code> in <code>/etc/openvpn</code> folder: </p>
+		<pre class="code-pre custom_prefix prefixed local-environment"><code><ul class="prefixed"><li class="line" prefix="client$">sudo cp <span class="highlight">client1.ovpn</span> /etc/openvpn/
+		</li><li class="line" prefix="client$">sudo cp <span class="highlight">client1.crt</span> /etc/openvpn/
+		</li><li class="line" prefix="client$">sudo cp <span class="highlight">ta.key</span> /etc/openvpn/
 		</li></ul></code></pre>
 
 		<p>Rename the <code>client1.ovpn</code> to <code>client.conf</code> :</p>
